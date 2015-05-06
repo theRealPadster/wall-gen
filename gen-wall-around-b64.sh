@@ -28,17 +28,23 @@ sed -i "s:imgwidth:$imgwidth:g" new/new-top.txt new/new-bottom.txt
 
 # define textbox geometry
 topBoxWidth="$[$imgwidth * 55 / 100]" # because only integers (no 0.55)
-topBoxX="$[$imgwidth * 225 / 1000]" # rounds down always
+bottomBoxWidth=$topBoxWidth #same as above for now
 
-topBoxHeight="$[$imgheight / 4]"
-bottomBoxHeight="$[$imgheight * 14 / 100]"
+topBoxX="$[$imgwidth * 225 / 1000]" # rounds down always
+bottomBoxX=$topBoxX #same as above for now
+
+topBoxHeight="$[$imgheight / 3]" #this was 4, but i made it bigger for longer quotes, leaves ~2.67% in between quote boxes (not actual text)
+bottomBoxHeight="$[$imgheight * 19 / 100]" # was 14%, made bigger for longer attributions
 
 topBoxY="$[$imgheight / 4]" # TODO - translations start at centre, + goes up, - goes down
 bottomBoxY="$[$imgheight * 61 / 100]" #"$[$imgheight * 11 / 100 * -1]" #"$[$imgheight / 4]" # TODO - optimize these, fix
 
 # replace svg's textbox geometry
 sed -i "s:topBoxWidth:$topBoxWidth:g" new/new-bottom.txt
+sed -i "s:bottomBoxWidth:$bottomBoxWidth:g" new/new-bottom.txt
+
 sed -i "s:topBoxX:$topBoxX:g" new/new-bottom.txt
+sed -i "s:bottomBoxX:$bottomBoxX:g" new/new-bottom.txt
 
 sed -i "s:topBoxHeight:$topBoxHeight:g" new/new-bottom.txt
 sed -i "s:bottomBoxHeight:$bottomBoxHeight:g" new/new-bottom.txt
@@ -132,13 +138,13 @@ inkscape -f new.svg -e new.png
 #########
 # NOTES #
 #########
-# quote is ~25% of height
-# bottom quote is ~14% of height
-# therefor middle is ~11% of height
+# quote is ~33% of height, was 25% before
+# bottom quote is ~19% of height, was 14% before
+# therefor middle is ~2.67% of height, was ~11% before
 
 # totals
-# text box takes up ~55% of width, centred (~22.5% each side)
-# text box takes up ~50% of height, centred, (~25% each side)
+# text boxes take up ~55% of width, centred (~22.5% each side)
+# text boxes take up ~55% of height, centred, (25% top, 20% bottom)
 
 # encode
 # $ base64 sampleimage.jpg > sample.txt
@@ -148,6 +154,22 @@ inkscape -f new.svg -e new.png
 
 # sed doesn't like colons, so I had to escape them all
 
-# TODO - add stroke? or filter images
+#inkscape command-line options that may be relevant
+#  -X, --query-x                             Query the X coordinate of the
+#                                            drawing or, if specified, of the
+#                                            object with --query-id
+#  -Y, --query-y                             Query the Y coordinate of the
+#                                            drawing or, if specified, of the
+#                                            object with --query-id
+# -W, --query-width                         Query the width of the drawing or,
+#                                            if specified, of the object with
+#                                            --query-id
+#  -H, --query-height                        Query the height of the drawing
+#                                            or, if specified, of the object
+#                                            with --query-id
+#  -S, --query-all                           List id,x,y,w,h for all objects
+#  -I, --query-id=ID                         The ID of the object whose
+#                                            dimensions are queried
+
 # TODO - adjust font size to a percent based on image height and how many lines it takes somehow
 # TODO - then (after above) position the author box closer to quote (based on quote position)
