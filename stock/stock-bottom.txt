@@ -1,0 +1,22 @@
+" height="imgheight" width="imgwidth" y="0" x="0"/>
+
+  <flowRoot id="quoteBoxID" style="word-spacing:0px;letter-spacing:0px" line-height="125%" xml:space="preserve" font-size="fontSizeMainpx" font-family="Sans" fill="#000000">
+  	<flowRegion id="flowRegion3044">
+  		<rect id="rect3046" ry="0" height="topBoxHeight" width="textBoxWidth" y="topBoxY" x="textBoxX"/>
+  	</flowRegion>
+  	<flowPara id="flowPara3048" style="text-anchor:middle;text-align:center" font-family="DejaVu Sans" fill="#ffffff" stroke="#000000" stroke-opacity="0.6">
+  		<flowSpan id="flowSpan3897" font-size="fontSizeBiggestpx">quoteQuoteStart</flowSpan>quoteQuoteRest
+  	</flowPara>
+  </flowRoot>
+  <flowRoot id="authorBoxID" style="word-spacing:0px;letter-spacing:0px" xml:space="preserve" line-height="125%" font-size="fontSizeMainpx" font-family="Sans" fill="#000000">
+  	<flowRegion id="flowRegion3828">
+  		<rect id="rect3830" y="bottomBoxY" width="textBoxWidth" x="textBoxX" height="bottomBoxHeight"/>
+  	</flowRegion>
+  	<flowPara id="flowPara3832" style="text-anchor:middle;text-align:center" font-family="DejaVu Sans" fill="#ffffff" stroke="#000000" stroke-opacity="0.6">
+  		<flowSpan id="flowSpan3895" font-size="fontSizeBiggerpx">quoteAuthorStart</flowSpan>quoteAuthorRest
+  	</flowPara>
+  	<flowPara id="flowPara3834" style="text-anchor:middle;text-align:center" fill="#ffffff" stroke="#000000" stroke-opacity="0.6" font-size="fontSizeBiggerpx">quoteYear
+  	</flowPara>
+  </flowRoot>
+ </g>
+</svg>
