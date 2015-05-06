@@ -10,7 +10,7 @@
   </flowRoot>
   <flowRoot id="authorBoxID" style="word-spacing:0px;letter-spacing:0px" xml:space="preserve" line-height="125%" font-size="fontSizeMainpx" font-family="Sans" fill="#000000">
   	<flowRegion id="flowRegion3828">
-  		<rect id="rect3830" y="bottomBoxY" width="topBoxWidth" x="topBoxX" height="bottomBoxHeight"/>
+  		<rect id="rect3830" y="bottomBoxY" width="bottomBoxWidth" x="bottomBoxX" height="bottomBoxHeight"/>
   	</flowRegion>
   	<flowPara id="flowPara3832" style="text-anchor:middle;text-align:center" font-family="DejaVu Sans" fill="#ffffff" stroke="#000000" stroke-opacity="0.6">
   		<flowSpan id="flowSpan3895" font-size="fontSizeBiggerpx">quoteAuthorStart</flowSpan>quoteAuthorRest
