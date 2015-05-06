@@ -27,8 +27,8 @@ sed -i "s:imgwidth:$imgwidth:g" new/new-top.txt new/new-bottom.txt
 #####
 
 # define textbox geometry
-textBoxWidth="$[$imgwidth * 55 / 100]" # because only integers (no 0.55)
-textBoxX="$[$imgwidth * 225 / 1000]" # rounds down always
+topBoxWidth="$[$imgwidth * 55 / 100]" # because only integers (no 0.55)
+topBoxX="$[$imgwidth * 225 / 1000]" # rounds down always
 
 topBoxHeight="$[$imgheight / 4]"
 bottomBoxHeight="$[$imgheight * 14 / 100]"
@@ -37,8 +37,8 @@ topBoxY="$[$imgheight / 4]" # TODO - translations start at centre, + goes up, - 
 bottomBoxY="$[$imgheight * 61 / 100]" #"$[$imgheight * 11 / 100 * -1]" #"$[$imgheight / 4]" # TODO - optimize these, fix
 
 # replace svg's textbox geometry
-sed -i "s:textBoxWidth:$textBoxWidth:g" new/new-bottom.txt
-sed -i "s:textBoxX:$textBoxX:g" new/new-bottom.txt
+sed -i "s:topBoxWidth:$topBoxWidth:g" new/new-bottom.txt
+sed -i "s:topBoxX:$topBoxX:g" new/new-bottom.txt
 
 sed -i "s:topBoxHeight:$topBoxHeight:g" new/new-bottom.txt
 sed -i "s:bottomBoxHeight:$bottomBoxHeight:g" new/new-bottom.txt
@@ -52,6 +52,7 @@ sed -i "s:bottomBoxY:$bottomBoxY:g" new/new-bottom.txt
 #4.4%h 40px
 #5.3%h 48px
 #6.2%h 56px
+# TODO - make this a fraction of textbox size, not image
 
 fontSizeMain="$[$imgheight * 44 / 1000]"
 fontSizeBigger="$[$imgheight * 53 / 1000]"
@@ -90,8 +91,8 @@ echo "Year: $quoteYear"
 
 #####
 
-#echo "textBoxWidth=$textBoxWidth"
-#echo "textBoxX=$textBoxX"
+#echo "topBoxWidth=$topBoxWidth"
+#echo "topBoxX=$topBoxX"
 
 #echo "topBoxHeight=$topBoxHeight"
 #echo "bottomBoxHeight=$bottomBoxHeight"
