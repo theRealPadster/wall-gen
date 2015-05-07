@@ -74,11 +74,6 @@ sed -i "s:fontSizeBiggest:$fontSizeBiggest:g" new/new-bottom.txt
 
 #####
 
-# convert jpg to base64
-base64 walls/"$theWall" > new/wall.txt # TODO - pipe this right through to the svg @ the end?
-
-#####
-
 # pick quote
 # number of lines in text file
 numLines=$(wc -l < stock/processedQuotes.txt)
@@ -127,7 +122,8 @@ sed -i "s:quoteYear:$quoteYear:g" new/new-bottom.txt
 
 # merge all files to one svg
 cat new/new-top.txt > new.svg
-cat new/wall.txt >> new.svg
+# convert jpg to base64
+base64 walls/"$theWall" >> new.svg
 cat new/new-bottom.txt >> new.svg
 
 #####
