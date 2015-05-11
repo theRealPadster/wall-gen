@@ -9,5 +9,5 @@ Script to overlay Andromeda quotes on wallpapers, given a list of quotes and som
   * Date
   * Blank line
 3. cd to *wall-gen* directory
-4. run *gen-wall.sh*
+4. run *gen-wall.sh* 
 This will output the finished version as *new.png*.
