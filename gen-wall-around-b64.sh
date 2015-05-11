@@ -169,3 +169,11 @@ inkscape -f new.svg -e new.png
 
 # TODO - adjust font size to a percent based on image height and how many lines it takes somehow
 # TODO - then (after above) position the author box closer to quote (based on quote position)
+
+# imagemagick generate blank canvas
+#convert -size 500x100 xc:transparent transparent.png
+
+# imagemagick draw text
+#convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -gravity center -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size 500x100 caption:"Stuff goes here" transparent.png +swap -gravity south -composite new.png
+
+#then convert to b64 and add to svg?
