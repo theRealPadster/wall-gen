@@ -17,17 +17,21 @@ imgwidth="$(identify -format "%w" walls/$theWall)"
 #####
 
 # define textbox geometry
-topBoxWidth="$[$imgwidth * 55 / 100]" # because only integers (no 0.55)
-bottomBoxWidth=$topBoxWidth #same as above for now
+quoteBoxWidth="$[$imgwidth * 55 / 100]" # because only integers (no 0.55)
+attribBoxWidth=$quoteBoxWidth #same as above for now
+yearBoxWidth=$quoteBoxWidth #same as above for now
 
-topBoxX="$[$imgwidth * 225 / 1000]" # rounds down always
-bottomBoxX=$topBoxX #same as above for now
+quoteBoxX="$[$imgwidth * 225 / 1000]" # rounds down always
+attribBoxX=$quoteBoxX #same as above for now
+yearBoxX=$quoteBoxX #same as above for now
 
-topBoxHeight="$[$imgheight / 3]" #this was 4, but i made it bigger for longer quotes, leaves ~2.67% in between quote boxes (not actual text)
-bottomBoxHeight="$[$imgheight * 19 / 100]" # was 14%, made bigger for longer attributions
+quoteBoxHeight="$[$imgheight / 3]"
+attribBoxHeight="$[$imgheight * 10 / 100]"
+yearBoxHeight="$[$imgheight * 8 / 100]"
 
-topBoxY="$[$imgheight / 4]" # TODO - translations start at centre, + goes up, - goes down
-bottomBoxY="$[$imgheight * 61 / 100]" #"$[$imgheight * 11 / 100 * -1]" #"$[$imgheight / 4]" # TODO - optimize these, fix
+quoteBoxY="$[$imgheight / 4]"
+attribBoxY="$[$imgheight * 66 / 100]"
+yearBoxY="$[$imgheight * 78 / 100]"
 
 # pick quote
 # number of lines in text file
@@ -46,22 +50,13 @@ echo "Author: $quoteAuthor"
 echo "Year: $quoteYear"
 
 #drop quote, author, year
-convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -geometry +$topBoxX+$topBoxY -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$topBoxWidth"x"$topBoxHeight" caption:"$quoteQuote" walls/$theWall +swap -composite new.png
+convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -geometry +$quoteBoxX+$quoteBoxY -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$quoteBoxWidth"x"$quoteBoxHeight" caption:"$quoteQuote" walls/$theWall +swap -composite new.png
 
-convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -geometry +$bottomBoxX+$bottomBoxY -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$bottomBoxWidth"x"$bottomBoxHeight" caption:"$quoteAuthor - $quoteYear" new.png +swap -composite new.png
+convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -geometry +$attribBoxX+$attribBoxY -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$attribBoxWidth"x"$attribBoxHeight" caption:"$quoteAuthor" new.png +swap -composite new.png
+
+convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -geometry +$yearBoxX+$yearBoxY -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$yearBoxWidth"x"$yearBoxHeight" caption:"$quoteYear" new.png +swap -composite new.png
 
 #gravity defaults to northwest, which is fine, it seems
-
-#####
-
-#echo "topBoxWidth=$topBoxWidth"
-#echo "topBoxX=$topBoxX"
-
-#echo "topBoxHeight=$topBoxHeight"
-#echo "bottomBoxHeight=$bottomBoxHeight"
-
-#echo "topBoxY=$topBoxY"
-#echo "bottomBoxY=$bottomBoxY"
 
 # replace quote stuff
 
@@ -86,7 +81,6 @@ quoteAuthorRest=${quoteAuthor:1}
 #TODO - set max text size
 #TODO - set custom stroke width
 #TODO - make captions not fuzzy?
-#TODO - separate chunk for author
 #TODO - make first character of quote larger
 #TODO - get proper font working
 #TODO - don't need sed anti-colon formatting?
