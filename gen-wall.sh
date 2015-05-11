@@ -49,14 +49,16 @@ echo "Quote: $quoteQuote"
 echo "Author: $quoteAuthor"
 echo "Year: $quoteYear"
 
+quoteAnchor="$[$imgheight * 85 / 1000]" #want quote anchored (y) at 41.5, not 50
+attribAnchor="$[$imgheight * 21 / 100]" #want attribution anchored (y) at 71, not 50
+yearAnchor="$[$imgheight * 32 / 100]" #want year anchored (y) at 82, not 50
+
 #drop quote, author, year
-convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -geometry +$quoteBoxX+$quoteBoxY -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$quoteBoxWidth"x"$quoteBoxHeight" caption:"$quoteQuote" walls/$theWall +swap -composite new.png
+convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -gravity center -geometry +0-$quoteAnchor -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$quoteBoxWidth"x"$quoteBoxHeight" caption:"$quoteQuote" walls/$theWall +swap -composite new.png
 
-convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -geometry +$attribBoxX+$attribBoxY -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$attribBoxWidth"x"$attribBoxHeight" caption:"$quoteAuthor" new.png +swap -composite new.png
+convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -gravity center -geometry +0+$attribAnchor -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$attribBoxWidth"x"$attribBoxHeight" caption:"$quoteAuthor" new.png +swap -composite new.png
 
-convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -geometry +$yearBoxX+$yearBoxY -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$yearBoxWidth"x"$yearBoxHeight" caption:"$quoteYear" new.png +swap -composite new.png
-
-#gravity defaults to northwest, which is fine, it seems
+convert -font "DejaVu Sans" -background 'rgba(0,0,0,0)' -gravity center -geometry +0+$yearAnchor -fill white -strokewidth 2 -stroke 'rgba(0,0,0,0.6)' -size "$yearBoxWidth"x"$yearBoxHeight" caption:"$quoteYear" new.png +swap -composite new.png
 
 # replace quote stuff
 
@@ -70,13 +72,6 @@ quoteAuthorRest=${quoteAuthor:1}
 #########
 # NOTES #
 #########
-# quote is ~33% of height, was 25% before
-# bottom quote is ~19% of height, was 14% before
-# therefor middle is ~2.67% of height, was ~11% before
-
-# totals
-# text boxes take up ~55% of width, centred (~22.5% each side)
-# text boxes take up ~55% of height, centred, (25% top, 20% bottom)
 
 #TODO - set max text size
 #TODO - set custom stroke width
