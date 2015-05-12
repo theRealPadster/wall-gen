@@ -6,7 +6,7 @@ numWalls=$(wc -l < walls/walls-list.txt)
 wallNumber="$[$RANDOM % $[$numWalls - 1] + 1]" # make interval one smaller to ignore walls-list.txt
 theWall=$(tail -n+$wallNumber walls/walls-list.txt | head -n1)
 #custom wall
-#theWall='600p.jpg'
+#theWall='stripes.png'
 
 #####
 
@@ -44,6 +44,27 @@ quoteQuote=$(tail -n+$[$quotePosition + 1] stock/processedQuotes.txt | head -n1)
 quoteAuthor=$(tail -n+$[$quotePosition + 2] stock/processedQuotes.txt | head -n1)
 quoteYear=$(tail -n+$[$quotePosition + 3] stock/processedQuotes.txt | head -n1)
 
+quoteQuote="This is test"
+
+quoteQuoteLength=$(echo $quoteQuote | wc -c)
+
+quoteQuoteLength="$[$quoteQuoteLength - 1]" #for some reason it makes it one longer than it is
+firstPad="$[(130 - $quoteQuoteLength) / 2]"
+lastPad="$[130 - $quoteQuoteLength - $firstPad]"
+
+echo "\$firstPad=$firstPad"
+echo "\$lastPad=$lastPad"
+
+echo "\$quoteQuoteLength = $quoteQuoteLength" 
+
+#pad with blank spaces
+if (($quoteQuoteLength < "130")); then #TODO - magic numbers
+    quoteQuote=$(printf "%"$firstPad"s" "$quoteQuote")
+    quoteQuote=$(printf "%-"$lastPad"s" "$quoteQuote")
+    echo "it got in"
+fi
+
+
 echo "Episode: $quoteEpisode"
 echo "Quote: $quoteQuote"
 echo "Author: $quoteAuthor"
@@ -74,13 +95,18 @@ quoteAuthorRest=${quoteAuthor:1}
 #########
 
 #TODO - set max text size
+#-----> check length of quote, pad up to a point with spaces? (130-ish?)
 #TODO - set custom stroke width
 #TODO - make captions not fuzzy?
 #TODO - make first character of quote larger
 #TODO - get proper font working
 #TODO - don't need sed anti-colon formatting?
+#TODO - random partial cutoffs on quote edges?
+#TODO - make year smaller
+#TODO - is it actually doing partial transparency?
 
 # sed doesn't like colons, so I had to escape them all
+#TODO - doesn't cause any issues now?
 
 # imagemagick generate blank canvas
 #convert -size 500x100 xc:transparent transparent.png
